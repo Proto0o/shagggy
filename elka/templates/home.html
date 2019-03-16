@@ -1,0 +1,138 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <style>
+      *{
+      margin: 0;
+      padding: 0;
+      font-family: sans-serif;
+     list-style: none;
+     text-decoration: none;
+    }
+    body{
+    background:#2f3542;
+    }
+    .middle{
+        position: absolute;
+         margin 0
+       transform: translate(-50%,-50%);
+      }
+      .menu{
+        width: 300px;
+          border-radius: 8px;
+        overflow: hidden;
+        }
+      .item{
+        border-top: 1px solid #2f3542;
+        overflow: hidden;
+      }
+    .btn{
+       display: block;
+        padding: 16px 20px;
+        background: #3498db;
+       color: white;
+       position: relative;
+      }
+      .btn:before{
+        content: "";
+        position: absolute;
+        width: 14px;
+        height: 14px;
+        background:#3498db;
+        left: 20px;
+        bottom: 0px;
+        transform: rotate(45deg);
+      }
+      .btn i{
+        margin-right: 10px;
+      }
+      .smenu{
+        background: #2f3542;
+        overflow: hidden;
+        transition: max-height 1s;
+        max-height: 0;
+      }
+      .smenu a{
+        display: block;
+        padding: 16px 26px;
+        color: white;
+        font-size: 14px;
+        margin: 4px 0;
+        position: relative;
+      }
+      .smenu a:before{
+        content: "";
+        position: absolute;
+        width: 6px;
+        height: 100%;
+        background: #3498db;
+        left: 0;
+        top: 0;
+        transition: 0.3s;
+        opacity: 0;
+      }
+      .smenu a:hover:before{
+        opacity: 1;
+      }
+      .item:target .smenu{
+        max-height: 10em;
+        transition-duration: 2s;
+
+      }
+      .box{
+        width: 300px;
+        height: 600px ;
+        border-radius: 24px;
+        background: #2f3542;
+      }
+      h1{
+        color:white; 
+      }
+    </style>
+          
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.3.1/css/all.css">
+  </head>
+ <body>
+  <form class="box" method="post">
+    
+    <div class="middle">
+       <div class="menu">
+         <li class="item" id='profile'>
+           <a href="#profile" class="btn"><i class="far fa-user"></i>Profile</a>
+            <div class="smenu">
+              {% if current_user.is_authenticated %}
+                <a  href="{{ url_for('logout') }}">Logout</a>
+              {% else %}
+                <a href="{{ url_for('login') }}">Login</a>
+                <a href="{{ url_for('register') }}">Register</a>
+              {% endif %}
+            </div>
+          </li>
+
+          <li class="item" id="messages">
+            <a href="#messages" class="btn"><i class="fas fa-camera"></i>Stream</a>
+            <div class="smenu">
+              {% if current_user.is_authenticated %}
+                <a href="{{ url_for('wathc') }}">Stream</a>
+                <a href="{{ url_for('search') }}">Search</a>
+                <a href="{{ url_for('stop1') }}">Stop</a>
+              {% else %}
+                <a href="{{ url_for('login') }}">Login to watch or stream</a>
+              {% endif %}
+           </div>
+         </li>
+
+         <li class="item" id="settings">
+           <a href="#settings" class="btn"><i class="fas fa-cog"></i>Settings</a>
+              <div class="smenu">
+                 <a href="#pass">Password</a>
+                   <a href="#">Language</a>
+              </div>
+              </li>
+             </li>
+          </div>
+          </div>
+    
+  </form>
+  </body>
+</html>

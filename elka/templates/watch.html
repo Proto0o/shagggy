@@ -1,0 +1,7 @@
+<html>
+	<body>
+		{% if current_user.is_authenticated %}
+		  <img src="{{ url_for('calc',username=current_user) }}">
+		{%endif%}
+	</body>
+</html>
